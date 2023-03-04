@@ -1,9 +1,23 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useEffect } from 'react';
+import { useAccount, useConnect, useDisconnect, useNetwork } from 'wagmi';
 
 function App() {
     const { connect, connectors } = useConnect();
     const { disconnect } = useDisconnect();
-    const { address, status, isConnected } = useAccount();
+    const { address, status, isConnected, isConnecting, isReconnecting, isDisconnected } =
+        useAccount();
+    const { chain } = useNetwork();
+
+    // Eager connection
+    useEffect(() => {
+        if (!isDisconnected) return;
+        const wagmiConnected = localStorage.getItem('wagmi.connected');
+        const isWagmiConnected = wagmiConnected ? JSON.parse(wagmiConnected) : false;
+
+        if (!isWagmiConnected) return;
+
+        connect({ connector: connectors[0] });
+    }, [connect, connectors]);
 
     return (
         <div className='layout'>
@@ -14,15 +28,22 @@ function App() {
                     {status}
                     {status === 'connected' ? '🔥' : ''}
                 </code>
+                {status === 'connected' ? ` to ${chain?.name}` : ''}
             </p>
             <p>
                 Address: <code>{address || 'N/A'}</code>
             </p>
-            {isConnected ? (
-                <button onClick={() => disconnect()}>Disconnect</button>
-            ) : (
-                <button onClick={() => connect({ connector: connectors[0] })}>Connect 🔥</button>
-            )}
+            <div style={{ marginTop: 20 }}>
+                {isConnecting || isReconnecting ? (
+                    <button>Loading</button>
+                ) : isConnected ? (
+                    <button onClick={() => disconnect()}>Disconnect</button>
+                ) : (
+                    <button onClick={() => connect({ connector: connectors[0] })}>
+                        Connect 🔥
+                    </button>
+                )}
+            </div>
         </div>
     );
 }

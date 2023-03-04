@@ -9,15 +9,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@web3auth/modal": "^4.6.2",
+    "@web3auth/ui": "^4.6.2",
+    "@web3auth/web3auth-wagmi-connector": "^2.2.0",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "wagmi": "^0.11.7"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "buffer": "^6.0.3",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
   }
