@@ -14,5 +14,6 @@ The `web3auth` modal provides web3 social authentication. It automatically creat
 - Make additional requests during authentication (eg call your BE server to authenticate the user)
 - Close the modal when errors happen during the authentication
 - Listen to modal events
+- Handle the case when the web3auth session expires
 
 Result: a unified deterministic and finite auth state. Call `useAccount` to get `isConnected` and `address`.
