@@ -1,4 +1,4 @@
-# Web3Auth Modal + Wagmi
+# Web3Auth Modal + Wagmi v0
 
 This is an example project of how to integrate [`web3auth`](https://web3auth.io/docs/) modal together with [`wagmi`](https://wagmi.sh/).
 
